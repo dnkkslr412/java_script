@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var method01 = function() {
+            console.log("안녕");
+        }
+        var result1 = method01();
+
+        var method02 = function(a) {
+            var a = "안녕";
+            return a;
+        }
+        var result2 = method02();
+        console.log(result2);
+
+        var method03 = function(a, b, c) {
+            var a = 1;
+            var b = 2;
+            var c = 3.14;
+            return a + b + c;
+        }
+        var result3 = method03();
+        console.log(result3);
+
+        var method05 = function(a) {
+            var a = ['안녕'];
+        var s = "";
+        for(var i = 0; i <= 4; i++){
+            s += a;
+        }
+        return s;
+        }
+        var result5 = method05();
+        console.log(result5);
+
+        var maxNum = function(a, b) {
+            if(a > b) {
+                return a;
+            }else {
+                return b;
+            }
+        }
+        var max = maxNum(5,4);
+        console.log(max);
+
+        var abs = function(a) {
+            if(a < 0) {
+                return -a;
+            }else {
+                return a;
+            }
+        }
+        var abs1 = abs(-7);
+        console.log(abs1);
+
+        var method06 = function(a) {
+         var a = ['a', 'b', 'c', 'd'];
+        var s = "";
+       
+        for(var i = 0; i <= a.length -1; i++){
+            s += a[i];
+        }
+            return s;
+        }
+        var result6 = method06();
+        console.log(result6); 
+
+        var method07 = function() {
+            var a = [1,2,3,4,5];
+            var s = 0;
+           
+                s += a[0];
+                s += a[1];
+                s += a[2];
+                s += a[3];
+                s += a[4];
+            
+            return s;
+        }
+        var result7 = method07();
+        console.log(result7);
+
+        var method08 = function(a, b, c) {
+            var arr = [a, b, c];
+            return arr;
+        }
+        var result8 = method08(1,2,3);
+        console.log(result8);
+    </script>
+
+
+</body>
+</html>
