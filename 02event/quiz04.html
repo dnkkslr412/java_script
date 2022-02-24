@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p id="title1">단어를 선택하세요</p>
+
+    <select id="selector1" onchange="change()">
+        <option value="단어를 선택하세요">선택</option>
+        <option value="English">영어</option>
+        <option value="한국어">한국어</option>
+        <option value="中国人">중국어</option>
+        <option value="日本語">일본어</option>
+    </select>
+
+    <p id="title2">단어를 선택하세요</p>
+
+    <select id="selector2" onchange="change()">
+        <option>선택</option>
+        <option>영어</option>
+        <option>한국어</option>
+        <option>중국어</option>
+        <option>일본어</option>
+    </select>
+
+    <script>
+        function change() {
+            var x = document.getElementById("selector1").value;
+       
+            document.getElementById("title1").innerHTML = x;
+         }
+
+        var selector = document.getElementById("selector2");
+        selector.onchange = function() {
+            //option은 select태그의 value입니다
+            //console.log(selector.value);
+
+            var title = document.getElementById("title2"); //title인 태그
+
+            if(selector.value == "영어") {
+                title.innerHTML = "영어 입니다";
+            }else if (selector.value == "한국어") {
+                title.innerHTML = "한국어 입니다";
+            }else if (selector.value == "중국어") {
+                title.innerHTML = "중국어 입니다";
+            }else if (selector.value == "일본어") {
+                title.innerHTML = "일본어 입니다";
+            }else { //선택인경우
+                title.innerHTML = "단어를 선택하세요";
+            }
+
+        }
+    </script>
+
+</body>
+</html>

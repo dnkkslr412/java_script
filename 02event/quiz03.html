@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="number" value="0" id="result">
+
+    <button type="button" onclick="count(this)">+</button>
+    <button type="button" onclick="count(this)">-</button>
+
+    <script>
+
+        function count(x) {
+            var result = document.getElementById("result");
+
+            //x태그가 +를 가지고 있다면 증가시킨다
+            if(x.innerHTML == "+") { //+버튼일때
+                result.value++;
+            }else {  //-버튼일때
+                if(result.value == 0) {
+                    alert("0보다 작을 수 없습니다")
+                    return;
+                }
+                result.value--;
+            }
+        }
+ 
+    </script>
+
+
+</body>
+</html>

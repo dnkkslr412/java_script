@@ -7,17 +7,37 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        //위쪽...
+        //확인창은 - confirm("질문") - 예 클릭시 true, 아니오 클릭시 false반환
+        //location.href = "경로";
+
+        window.onload = function () {  //스크립트가 위에있을때 아래의 버튼을 동작시키려면 윈도우태그를 사용한다
+                var btn1 = document.getElementById("btn1");
+                var btn2 = document.getElementById("btn2");
+                //btn1 이벤트
+                btn1.onclick = function () {
+                    if (confirm("이동하시겠습니까?")) {
+                        location.href = "https://www.naver.com/";
+                    }
+                }
+
+                //btn2 이벤트
+                btn2.onclick = function () {
+                    if (confirm("이동하시겠습니까?")) {
+                        location.href = "https://www.google.com/";
+                    }
+                }
+            }
+    </script>
 
     <h3>이벤트는 각각</h3>
 
     <button id="btn1">네이버로이동</button>
     <button id="btn2">구글로이동</button>
 
-    <script>
-        //위쪽...
-        //확인창은 - confirm("질문") - 예 클릭시 true, 아니오 클릭시 false반환
-        //location.href = "경로";
+    <!-- <script>
+       //직접했을때
         
         var btn1 = document.getElementById("btn1");
         btn1.onclick = function() {
@@ -40,7 +60,7 @@
                 console.log(true);
             }
         }
-    </script>
+    </script> -->
     
 </body>
 </html>
