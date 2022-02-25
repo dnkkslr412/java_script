@@ -30,19 +30,47 @@
         3. 체크되어 있다면 배열에 체크된 좌석을 추가
         4. JSON형태의 문자열로 변환시켜주세요.
         */
-        var btn = document.getElementById("btn");
-        btn.onclick = function() {
-            var data = "";
-            var seat = document.getElementsByName("seat");
-            for(var i = 0; i < seat.length; i++){
-              if(seat[i].checked == true) {
-                data+=seat[i].value;
+        // 숙제 직접한것
+        // var btn = document.getElementById("btn");
+        // btn.onclick = function() {
+        //     var data = [];
+        //     var seat = document.getElementsByName("seat");
+        //     for(var i = 0; i < seat.length; i++){
+        //       if(seat[i].checked === true) {
+        //         data+=seat[i].value;
                
-              }
+        //       }
+        //     }
+        //     var str = JSON.stringify(data);
+        //         console.log("data :" + str );
+        // }
+
+        var btn = document.getElementById("btn");
+
+        btn.onclick = function() {
+
+            var seat = document.getElementsByName("seat");//배열
+            var bool = false; //체크여부를 확인할 변수
+            var arr = new Array(); //요소를 담을 배열
+
+            for(var i = 0; i < seat.length; i++) {
+                if(seat[i].checked) {
+
+                    arr.push(seat[i]); //배열에 추가
+                    bool = true; //체크되었다는 뜻
+
+                }
             }
-            var str = JSON.stringify(data);
-                console.log("data :" + str );
+            if(bool) {
+                //결과출력
+                var str = JSON.stringify({data: arr});
+                console.log(str);
+            }else {
+                alert("좌석체크는 필수입니다")
+            }
+
         }
+
 
 
 
