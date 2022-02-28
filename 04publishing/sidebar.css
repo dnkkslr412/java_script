@@ -43,7 +43,7 @@
     line-height: 30px;
     color: #818181;
     text-decoration: none;
-    padding: 5px 0 5px 10px; /* 상 우 하 좌 */
+    padding: 5px 0 5px 0px; /* 상 우 하 좌 */
     box-sizing: border-box;
     overflow: hidden;/* 넘치는 글자에 대해서 숨긴다 */
 }
@@ -51,6 +51,10 @@
 .side .sidenav li a:hover {
     background-color: #00acac;
     color: #fff;
+}
+
+.side .sidenav li a span {
+    padding-left: 20px;
 }
 
 

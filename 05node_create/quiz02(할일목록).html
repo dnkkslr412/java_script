@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>할일 목록 만들어보기</h3>
+
+    <form class="nameForm">
+        <h3 class="nameTitle"></h3>
+        <input type="text" placeholder="이름을 입력하세요">
+        <button type="button">확인</button>
+    </form>
+
+    <form class="todoForm">
+        <input type="text" placeholder="할일을 작성하세요">
+        <button type="button">확인</button>
+    </form>
+
+    <ul class="todoList">
+
+    </ul>
+
+    <script>
+        //이름 작성
+        var nameForm = document.querySelector(".nameForm");
+        var nameTitle = nameForm.querySelector(".nameTitle");//네임폼안에 네임타이틀을 가져옴
+        var input = nameForm.querySelector("input");
+        var button = nameForm.querySelector("button");
+
+        button.addEventListener("click", regist); //표준이벤트 방식
+        function regist() {
+            nameTitle.innerHTML = input.value + "님 안녕하세요"; //인풋값을 텍스트에 저장
+            input.style.display = "none"; //스타일을 사용해 인풋태그 없애기
+            button.style.display = "none"; //버튼없애기
+        }
+
+        //할일목록 작성
+        var todoForm = document.querySelector(".todoForm"); //form
+        var todoInput = todoForm.querySelector("input"); //form -> input
+        var todoButton = todoForm.querySelector("button");//form -> button
+        var todoList = document.querySelector(".todoList");//ul
+
+
+        todoButton.addEventListener("click", regist2);
+        function regist2() {
+
+            var text = todoInput.value; //인풋값을 텍스트에 저장
+            todoInput.value = "";
+
+            //btn생성
+            var btn = document.createElement("button");
+            btn.innerHTML = "X";
+
+            //li생성
+            var li = document.createElement("li");
+            li.innerHTML = text; //appenChild는 태그의 모형일때만 넣는게 가능(문자열x)
+            li.appendChild(btn); //li자식으로 btn을 마지막에 하나추가
+
+            //ul의 자식으로 추가
+            todoList.appendChild(li);
+        }
+    </script>
+</body>
+</html>

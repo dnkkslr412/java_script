@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button type="button" id="add">추가하기</button>
+    <button type="button" id="rev">삭제하기</button>
+
+
+    <ul class="list">
+        <!-- <li><a href="#">1.</a></li> -->
+    </ul>
+
+    <script>
+        var count = 0; //전역변수
+        var add = document.getElementById("add");
+        add.onclick = function() {
+
+            //li, a, 텍스트
+            var li = document.createElement("li"); //만들 태그를 문자열의 형태로 적어넣는다
+            var a = document.createElement("a");
+            var text = document.createTextNode(++count + ".문자열생성"); //문자열로 생성한다
+
+            a.href = "https://www.naver.com"; //a의 속성추가
+
+            a.appendChild(text);//a자식으로 text추가
+            li.appendChild(a);//li자식으로 a추가
+
+            document.querySelector(".list").appendChild(li);
+
+        }
+
+        //삭제기능
+        var rev = document.getElementById("rev");
+        rev.onclick = function() {
+
+            var list = document.querySelector(".list");
+
+            // console.log(list.children); //엘리먼트의 형태만 선택(삭제기능에 더 적합함)
+            // console.log(list.childNodes); //text, 주석, 엘리먼트를 모두 선택
+            // console.log(list.children[0]); //첫번째 자식요소
+            // console.log(list.children.length-1); //마지막 자식요소
+
+            //console.dir(list); 콘솔.로그 처럼 자주 사용하면 좋은태그 ★★★★
+            //어떤 dir를 찍어서 확인해본 태그가 어떤태그를 사용할수있는지 확인할수있다
+            //list.removeChild(자식요소);
+
+            //부모태그.removeChild(자식요소)
+            //list.removeChild(list.children[0]);  //처음만들어진 순서로 삭제
+            list.removeChild(list.lastChild); //마지막에 만들어진 순서로 삭제
+        }
+    </script>
+
+</body>
+</html>
