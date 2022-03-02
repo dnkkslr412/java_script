@@ -26,7 +26,7 @@
                 <th>내용</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table"><!-- 클래스 생성 -->
             <tr>
                 <td>
                     <button type="button" onclick="down(this)">▽</button>
@@ -77,8 +77,8 @@
 
     <script>
         function down(node) {
-            console.dir(node);
-
+            console.dir(node); //dir(선택노드) - 선택된 노드의 사용할수있는 태그를 확인할수있음
+            /*
             console.log(node.parentElement);//부모노드 선택(엘리먼트 형식으로 선택)
             console.log(node.parentNode);//부모노드 선택(text, 주석, 엘리먼트 형식으로 선택)
 
@@ -87,6 +87,40 @@
 
             console.log(node.firstElementChild);//첫번째 자식요소(지금은 x)
             console.log(node.lastElementChild);//마지막 자식요소(지금은 x)
+            */
+
+            //클릭한 버튼의 부모
+            var current = node.parentElement.parentElement;//부모의 부모을 선택함(tr선택)
+            var next = current.nextElementSibling; //tr의 다음 형제노드 선택(current.)
+
+            console.log(current);
+            console.log(next);
+
+            //마지막 행이라면 종료
+            if(next == null) {
+                alert("마지막 행입니다");
+                return;
+            }
+
+            //insertBefore(삽입노드, 기준노드); //기준노드 앞에 삽입노드를 추가
+            var table = document.querySelector(".table"); 
+            table.insertBefore(next, current); //인서트비포 태그를 사용하기위해 tbody태그에 클래스추가 
+
+        }
+
+        //up버튼 - insertBefore를 이용하여 처리
+        function up(node) {
+            var current = node.parentElement.parentElement;//tr
+            var prev = current.previousElementSibling;
+
+            //console.log(current, prev);
+            if(prev == null){
+                alert("첫번째 행입니다");
+                return;
+            }
+
+            var table = document.querySelector(".table");
+            table.insertBefore(current, prev);//기준이 되는 노드가 뒤로감
         }
     </script>
 
