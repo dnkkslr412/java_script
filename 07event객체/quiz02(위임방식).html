@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        ul > li {
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h3>이벤트위임으로 이미지적용방법</h3>
+
+    <div>
+        <ul class="imgs">
+            <li><img src="img/1.jpg" width="100"></li>
+            <li><img src="img/2.jpg" width="100"></li>
+            <li><img src="img/3.jpg" width="100"></li>
+            <li><img src="img/4.jpg" width="100"></li>
+        </ul>
+    </div>
+
+    결과:
+    <div class="result">
+        <img src="img/1.jpg" width="400" alt="대표이미지">
+    </div>
+    
+    <script>
+        var result = document.querySelector(".result > img");
+        var imgs = document.querySelector(".imgs"); //ul
+        imgs.onclick = function() {
+            if(event.target.tagName != "IMG") return;
+            result.src = event.target.src;
+        }
+    </script>
+
+</body>
+</html>
