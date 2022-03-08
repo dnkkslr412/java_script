@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    쿠키이름:<input type="text" id="key"><br>
+    쿠키값:<input type="text" id="val"><br>
+
+    <button type="button" id="createCookie">쿠키생성</button>
+
+    <hr>
+    쿠키값확인:<input type="text" id="find">
+    <button type="button" id="findCookie">쿠키확인하기</button>
+
+
+
+
+    <script>
+        var createCookie = document.getElementById("createCookie");
+        createCookie.onclick = function() {
+            //쿠키생성
+            var key = document.getElementById("key").value;
+            var val = document.getElementById("val").value;
+
+            console.log(key, val);
+
+            var date = new Date();
+            date.setDate(date.getDate() + 7); //현재 일자 + 7
+
+            //쿠키는 문자열 형태로 만듭니다 (단, 반드시 지켜야하는 형식이 있습니다.)
+            var cookie = "";
+            cookie += key + "=" + val + ";";
+            cookie += "expires=" + date.toUTCString() + ";";
+
+            document.cookie = cookie;
+        }
+
+        //쿠키확인하기
+        var findCookie = document.getElementById("findCookie");
+        findCookie.onclick = function() {
+
+            var find = document.getElementById("find").value; //찾을 키값
+
+            //console.log(document.cookie); //document안에 쿠키값
+
+            //; 기준으로 분할
+            var arr = document.cookie.split("; ");
+            //반복
+            for(var i = 0; i < arr.length; i++){
+                
+                if(arr[i].indexOf(find) != -1) { //찾으면 위치반환, 없으면 -1반환
+                    console.log(arr[i].replace(find+"=", " "));
+                    
+
+                }
+
+            }
+
+        }
+    </script>
+
+</body>
+</html>
