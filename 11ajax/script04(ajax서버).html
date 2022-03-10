@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .movieList {overflow: hidden; width: 90%; margin: 0 auto;}
+        .movieList > .movie {
+            float: left; 
+            width: 33.3333%;
+            box-sizing: border-box; 
+            height: 300px; 
+            position: relative; 
+            margin-bottom: 100px;
+        }
+        .movieList > .movie > img {position: absolute; left: 0; top: 0; width: 150px;}
+        .movieList > .movie > .inner {padding-left: 150px;}
+        .movieList > .movie > .inner > .summary {overflow: scroll; height: 100px;}
+        .movieList > .movie > .inner > .genres > li {display: inline-block;}
+    </style>
+
+</head>
+<body>
+    
+    <div class="movieList">
+        <!-- <div class="movie">
+            <img src="#">
+            <div class="inner">
+                <h3 class="title">제목</h3>
+                <h3 class="year">년도</h3>
+                <ul class="genres">
+                    <li>장르1</li>
+                    <li>장르2</li>
+                    <li>장르3</li>
+                </ul>
+            </div>
+        </div> -->
+    </div>
+
+
+    <script>
+        //https://yts.mx/api
+        //요청주소 : https://yts.mx/api/v2/list_movies.json
+        fetch("https://yts.mx/api/v2/list_movies.json?limit=10&sort_by=rating")
+        .then(function(response) {
+            //console.log(response);
+            if(response.status != 200) {
+                alert("서버통신에 실패했습니다");
+            }else {
+                // response.json().then(function(data) {
+                //     console.log(data);
+                // }) 
+                return response.json(); //리턴 - 프로미스(json이 promise를 반환) 다음 then구문으로 결과를 넘긴다
+            }   //위 식을 리턴으로 보내고 then아래에 then을 연결하며 사용가능(위 주석처리식과 같은결과)
+
+        }).then(function(jsonData) {
+            //console.log(jsonData);
+            var data = jsonData.data.movies; //jsonData["data"]["movies"] 값가져오기
+            //console.log(data);
+
+            var str = ""; //아래의 정보가 들어있는 변수를 박스에 누적하여 사용하기위한 문자열변수
+            for(var i = 0; i < data.length; i++) {
+                //console.log(data[i]);
+                var img = data[i].medium_cover_image; //data[i].뽑아올 데이터명
+                var title = data[i].title;
+                var year = data[i].year;
+                var summary = data[i].summary;
+                var genres = data[i].genres;
+
+                // console.log(img);
+                // console.log(title);
+                // console.log(year);
+                // console.log(summary);
+                // console.log(genres);
+
+                str += '<div class="movie">';
+                str += '<img src="' + img + '">';
+                str += '<div class="inner">';
+                str += '<h3 class="title">'+ title +'</h3>';
+                str += '<h3 class="year">'+ year +'</h3>';
+                str += '<ul class="genres">';
+                for(var j = 0; j < genres.length; j++){ //장르도 배열값을 가지고있어 반복문사용
+                    str += '<li>-'+ genres[j] +'</li>';
+                }
+                str += '</ul>';
+                str += '<p class="summary">'+ summary +'</p>';
+                str += '</div>';
+                str += '</div>'; 
+            }//end for
+            //console.log(str);
+            document.querySelector(".movieList").innerHTML = str;
+        })
+    </script>
+
+</body>
+</html>

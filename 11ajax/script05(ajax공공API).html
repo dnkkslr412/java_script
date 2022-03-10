@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button type="button" class="next">다음데이터가져오기</button>
+
+    <script>
+        //5568734752646e6b39346d6a7a4b53
+        function getAjax(page) { //pageNum과 같음 값 1이 저장됨
+
+            var end = page * 10; //1 * 10; 현재페이지의 마지막페이지
+            var start = end - 9; //현재페이지의 첫페이지
+
+            //console.log(start, end) 페이지값 확인
+
+            fetch("http://openapi.seoul.go.kr:8088/5568734752646e6b39346d6a7a4b53/json/TbPublicWifiInfo/"+ start + "/" + end)
+                .then(function (response) { //첫번째 then
+                    //console.log(response); API을 받았는지 확인
+                    if (response.status != 200) {
+                        alert("요청에 실패했습니다!")
+                    } else {
+                        return response.json();
+                    }
+                }).then(function (data) { //두번째 then
+                    console.log(data);
+                });
+            }
+
+        var pageNum = 1; //페이지변수 1번페이지
+        var next = document.querySelector(".next");//버튼을 클릭하면 위 정보의 다음정보를 확인 
+        next.onclick = function() {
+            getAjax(pageNum); //getAjax함수 호출(getAjax함수에 1값을 보냄)
+            pageNum++; //페이지변수 증가 (버튼을 누르면 1~10, 11~20.....)
+        }
+
+    </script>
+
+</body>
+</html>
