@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- kakao SDK로드 -->
+    <script src="js/kakao.js"></script>
+
+    <style>
+        .kakaoBtn {
+            background-image: url(img/kakao_login_medium_narrow.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #FEE500;
+            border: none;
+            width: 200px;
+            height: 50px;
+            cursor: pointer;
+
+        }
+    </style>
+
+</head>
+<body>
+
+    <form action="##" method="post" name="loginForm">
+        아이디:<input type="text" name="id"><br>
+        비밀번호:<input type="password" name="pw"><br>
+
+        <input type="submit" value="로그인">
+    </form>
+
+    <button type="button" class="kakaoBtn" onclick="kakaoLogin();"></button>
+    <button type="button" onclick="kakaoLogout();">카카오로그아웃</button>
+    
+    <script>
+        //1. kakao SDK시작
+        //2. 플랫폼만들기
+        //3. 로그인활성화 설정
+        //4. 동의항목 구성
+        Kakao.init('16d287eb6e69915065a95a9c1d818e97'); //1. (2,3번은 카카오디벨로퍼 사이트에서 정독하며 설정해야함)
+
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+
+        //5. 카카오 로그인버튼
+        function kakaoLogin() {
+
+            Kakao.Auth.login({
+                success: function (response) {
+                    //console.log(response); 로그인 성공시 넘어온값들을 확인
+                    //console.log(response.access_token); //넘어온 값중 토큰값 확인
+
+                    //6.사용자 정보를 사용하기 위해 어세스토큰을 저장
+                    Kakao.Auth.setAccessToken(response.access_token);//토큰할당하기
+
+                    //7.유저정보 요청
+                    getInfo();
+                },
+                fail: function (error) {
+                    console.log(error);
+                },
+            });
+        }
+    function getInfo() {
+
+        Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(response) {
+                //console.log(response);
+                console.log(response.kakao_account.has_email); //사용자 이메일를 뽑아야하는데 선택동의를 안해서 이메일을 못뽑음
+                console.log(response.kakao_account.profile.nickname); //사용자 닉네임
+
+                //JS코드를 사용해서 응용.
+                //예시
+                document.loginForm.id = response.kakao_account.email;
+                //document.location.submit();
+            },
+            fail: function(error) {
+                console.log(error);
+            }
+    });
+    }
+
+    function kakaoLogout() {
+        if (!Kakao.Auth.getAccessToken()) {
+            console.log('Not logged in.');
+        return;
+        }
+        Kakao.Auth.logout(function() {
+            console.log(Kakao.Auth.getAccessToken());
+            //JS로 로그아웃처리...
+        });
+    }
+        
+    </script>
+
+</body>
+</html>

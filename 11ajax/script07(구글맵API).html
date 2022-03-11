@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #map {
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 맵을 그리는 곳 -->
+    <div id="map"></div>
+
+    <script>
+    //3. 맵 초기화 함수
+        let map;
+
+        function initMap() {
+            //5. 위도경도
+            var myLatLng = { lat:37.498095, lng:127.027610 }; //강남 위도경도 값
+
+            map = new google.maps.Map(document.getElementById("map"), );
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Hello World!",
+            });
+        }
+    </script>
+
+
+    <!-- 1. SDK로드 (API_KEY설정) 이코드가 아래있는 이유 = initMap이라는 코드가 들어있기때문에 오류를 회피하기위함-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpCdsrl4828O4FOrcCMfHynH7lkASkr9c&callback=initMap&v=weekly" async></script>
+
+
+</body>
+</html>
